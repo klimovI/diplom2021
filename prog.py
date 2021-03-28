@@ -1,4 +1,4 @@
-from math import sin, cos, exp, radians
+from math import sin, cos, exp, radians, acos
 from sys import argv
 
 
@@ -60,16 +60,12 @@ def Z(x):
 x = 0
 TECu = 0
 h = 0
-x_max_of_N = 0 # x для которого h = Zm (для расчёта вертикального ПЭС)
 while (h <= Hmax): 
   x += dX # увеличивается на заданный шаг
   # print('x = ', x)
 
   h = H(x) # используется процедура H(x)
   # print('h = ', h)
-
-  if (h > Zm) and (x_max_of_N == 0):
-    x_max_of_N = x # запоминаем x для дальнейшего расчёта вертикального ПЭС
 
   dZ = Z(x) - Z(x - dX) # увеличение шага по дельта z
   # print('dZ = ', dZ)
@@ -81,6 +77,11 @@ while (h <= Hmax):
   # print('TECu = ', TECu)
 
 print(TECu)
+
+
+# выводится из формулы для процедуры H(x) только здесь получаем x(h)
+alpha = acos(cos(theta)/(Zm/R0 + 1)) - theta
+x_max_of_N = alpha * R0 # x для которого h = Zm (для расчёта вертикального ПЭС)
 
 # Цикл вычисления вертикального ПЭС
 TECu = 0
