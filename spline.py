@@ -37,21 +37,34 @@ def spline(xArr, yArr):
   c = []
   for i in range(0, yArrLen + 1): c.append((b[i + 1] - b[i]) / (2 * h))
 
+  def f(newX):
+    part = int(newX // h)
+    A = a[part]
+    B = b[part]
+    C = c[part]
+    X = xArr[part]
 
-  print(a)
-  print(b)
-  print(c)
+    xx = newX - X
+    return A + B * xx + C * xx ** 2
 
-# f = interp1d(x, y, kind='quadratic')
-# print(sin(pi / 7))
-# print(f(pi / 7))
+
+  return f
+
+
 
 x = []
 y = []
-for i in range(0, 5):
+for i in range(0, 3):
   xi = i * pi / 4
   yi = sin(xi)
   x.append(xi)
   y.append(yi)
 
-spline(x, y)
+finterp1d = interp1d(x, y, kind='quadratic')
+
+f = spline(x, y)
+x = pi / 5
+
+print(f(x))
+print(sin(x))
+print(finterp1d(x))
