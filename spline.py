@@ -1,6 +1,3 @@
-from scipy.interpolate import interp1d
-from math import sin, cos, exp, radians, acos, pi, ceil
-
 def spline(xArr, yArr):
   h = xArr[1] - xArr[0]
   xArrLen = len(xArr)
