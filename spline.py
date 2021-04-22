@@ -34,9 +34,13 @@ def spline(xArr, yArr):
   b.append(y[yArrLen])
 
   #calc c
+  c = []
+  for i in range(0, yArrLen + 1): c.append((b[i + 1] - b[i]) / (2 * h))
+
 
   print(a)
   print(b)
+  print(c)
 
 # f = interp1d(x, y, kind='quadratic')
 # print(sin(pi / 7))
