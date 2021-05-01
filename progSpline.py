@@ -40,6 +40,7 @@ def F0(x):
   return f_cr + k * x
 
 step = 2 # 1/step
+print('step', '1/' + str(step))
 def getSplineFunc():
   alp = acos(cos(theta)/(Hmax/R0 + 1)) - theta
   xMax = alp * R0
