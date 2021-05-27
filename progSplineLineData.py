@@ -11,8 +11,6 @@ dataX = [x * 1000 for x in dataX]
 lineData = [x * 1000000 for x in lineData]
 splineData = [x * 1000000 for x in splineData]
 
-print(dataX)
-
 
 # общие параметры
 R0 = 6371000 # радиус земли (в метрах)
@@ -33,7 +31,7 @@ c = 299792458 # скорость света (м/с)
 # получение параметров от пользователя (консоли) (закомментировал для теста программы)
 # params = argv[1:] # приходит массив а параметры идут только со 2го элемента массива
 
-params = [100, 9, -3, 10, 300, 100, 1575.42] # параметры для теста программы (после теста будут убраны)
+params = [100, 9, -3, 30, 300, 100, 1575.42] # параметры для теста программы (после теста будут убраны)
 params = list(map(float, params)) # от пользователя параметры пришли строкой нужно перевести в числа
 dX, f_cr, k, theta_degree, Zm, Wm, f_w = params # создание переменных из массива параметров
 
@@ -56,7 +54,7 @@ def H(x):
   b = cos(theta + x / R0)
   return R0 * (a / b - 1)
 
-f = spline(dataX, lineData)
+f = spline(dataX, splineData)
 
 # вычисление электронной концентрации, от расстояния по дуге на плоскости земли и высоты
 def N(x, h):
@@ -100,6 +98,7 @@ while (h <= Hmax):
   TECu += n * dZ # увеличиваем значение электронной концентрации
   # print('TECu = ', TECu)
 
+print('Верт. град = ', theta_degree)
 print('TEC = ', round(TECu / 10**16, 2))
 print('задержка', round((DeltaL(TECu) / c) * 10**9, 2))
 p1 = round(DeltaL(TECu), 2)
@@ -127,6 +126,7 @@ while (h <= Hmax):
 TECu *= 1 + 16 * (0.53 - theta_degree / 180) ** 3
 #print(TECu)
 print()
+print('Накл.')
 print('TEC = ', round(TECu / 10**16, 2))
 print('задержка', round((DeltaL(TECu) / c) * 10**9, 2))
 p2 = round(DeltaL(TECu), 2)
