@@ -3,6 +3,17 @@ from sys import argv
 from spline import spline
 
 
+dataX = [0, 500, 1000, 1500, 2000, 2500, 3000] # в км
+lineData = [4.923, 5.139166667, 5.355333333, 5.5715, 5.787666667, 6.003833333, 6.22] # в МГц
+splineData = [4.923, 4.84, 4.86, 5, 5.275, 5.8, 6.22] # в МГц
+
+dataX = [x * 1000 for x in dataX]
+lineData = [x * 1000000 for x in lineData]
+splineData = [x * 1000000 for x in splineData]
+
+print(dataX)
+
+
 # общие параметры
 R0 = 6371000 # радиус земли (в метрах)
 Hmax = 2000000 # высота максимума ионосферы (в метрах)
@@ -22,7 +33,7 @@ c = 299792458 # скорость света (м/с)
 # получение параметров от пользователя (консоли) (закомментировал для теста программы)
 # params = argv[1:] # приходит массив а параметры идут только со 2го элемента массива
 
-params = [100, 9, -3, 50, 300, 100, 1575.42] # параметры для теста программы (после теста будут убраны)
+params = [100, 9, -3, 10, 300, 100, 1575.42] # параметры для теста программы (после теста будут убраны)
 params = list(map(float, params)) # от пользователя параметры пришли строкой нужно перевести в числа
 dX, f_cr, k, theta_degree, Zm, Wm, f_w = params # создание переменных из массива параметров
 
@@ -39,28 +50,13 @@ Wm *= 1000 # километры в метры
 def F0(x):
   return f_cr + k * x
 
-step = 2 # 1/step
-print('step', '1/' + str(step))
-def getSplineFunc():
-  alp = acos(cos(theta)/(Hmax/R0 + 1)) - theta
-  xMax = alp * R0
-
-  xArr = []
-  yArr = []
-  stepSize = xMax / step
-  for i in range(0, step + 1):
-    xi = i * stepSize
-    xArr.append(i * stepSize)
-    yArr.append(F0(xi))
-
-  return spline(xArr, yArr)
-f = getSplineFunc()
-  
 # вычисление высоты, от расстояния по дуге на плоскости земли
 def H(x):
   a = cos(theta)
   b = cos(theta + x / R0)
   return R0 * (a / b - 1)
+
+f = spline(dataX, lineData)
 
 # вычисление электронной концентрации, от расстояния по дуге на плоскости земли и высоты
 def N(x, h):
