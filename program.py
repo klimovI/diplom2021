@@ -56,10 +56,10 @@ def Z(x):
   return R0 * a / b
 
 def printData(TEC):
-  print('TEC = ', TEC / 10**16) # перевод в TECU
+  print('TEC =', TEC / 10**16, 'TECU') # перевод в TECU
   dL = 40.26 * TEC / f_w ** 2
-  print('задержка', (dL / c) * 10**9)
-  print('поправка', dL)
+  print('задержка =', (dL / c) * 10**9, 'нс.')
+  print('поправка =', dL, 'м.')
 
 
 # Цикл вычисления наклонного ПЭС
@@ -77,7 +77,7 @@ while (h <= Hmax):
   n = N(x, h) # концентрация электронов для данных координат
   TECu += n * dZ # увеличиваем значение электронной концентрации
 
-print('Наклонный ПЭС')
+print('Точный способ расчёта ПЭС')
 printData(TECu)
 
 
@@ -98,5 +98,5 @@ while (h <= Hmax):
 TECu *= 1 + 16 * (0.53 - theta_degree / 180) ** 3
 
 print()
-print('Вертикальный ПЭС')
+print('Приближённый способ расчёта ПЭС')
 printData(TECu)
