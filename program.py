@@ -100,3 +100,4 @@ TECu *= 1 + 16 * (0.53 - theta_degree / 180) ** 3
 print()
 print('Приближённый способ расчёта ПЭС')
 printData(TECu)
+input()
