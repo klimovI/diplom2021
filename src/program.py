@@ -5,13 +5,16 @@ from spline import spline
 params = []
 with open('data.txt', encoding = 'utf8') as file:
    for line in file:
-      string = line.split('#')[0]
-      arr = string.split()
-      if (len(arr) >1):
-        num = list(map(float, string.split()))
-      else:
-        num = float(arr[0])
-      params.append(num)
+      try:
+        string = line.split('#')[0]
+        arr = string.split()
+        if (len(arr) >1):
+          num = list(map(float, string.split()))
+        else:
+          num = float(arr[0])
+        params.append(num)
+      except:
+        break
 
 # основные параметры
 R0 = 6371000 # радиус земли (в метрах)
