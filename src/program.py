@@ -2,11 +2,8 @@ from math import sin, cos, exp, radians, acos
 from os import path
 from spline import spline
 
-basepath = path.dirname(__file__)
-dataPath = path.join(basepath, 'data.txt')
-
 params = []
-with open(dataPath, encoding = 'utf8') as file:
+with open('data.txt', encoding = 'utf8') as file:
    for line in file:
       string = line.split('#')[0]
       arr = string.split()
