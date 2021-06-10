@@ -1,5 +1,4 @@
 from math import sin, cos, exp, radians, acos
-from os import path
 from spline import spline
 
 params = []
