@@ -1,2 +1,2 @@
 @echo OFF
-python src/program.py
+python src/spline.py

@@ -46,3 +46,23 @@ def spline(xArr, yArr):
 
 
   return f
+
+
+params = []
+with open('data.txt', encoding = 'utf8') as file:
+   for line in file:
+      try:
+        arr = line.split()
+        num = list(map(float, arr))
+        params.append(num)
+      except:
+        break
+
+if (len(params) > 2):
+  f = spline(params[0], params[1])
+
+  for value in params[2]:
+    try:
+      print('F(' + str(value) + ')', '=', f(value))
+    except:
+      print('Value', value, 'is out of range')
