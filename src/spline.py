@@ -66,3 +66,5 @@ if (len(params) > 2):
       print('F(' + str(value) + ')', '=', f(value))
     except:
       print('Value', value, 'is out of range')
+
+input()
