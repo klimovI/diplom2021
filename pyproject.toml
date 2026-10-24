@@ -1,0 +1,15 @@
+[project]
+name = "tec"
+version = "1.0.0"
+description = "Расчёт полного электронного содержания ионосферы (ПЭС) и задержки сигнала GNSS"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+tec = "tec.program:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
